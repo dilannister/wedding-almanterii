@@ -1,34 +1,39 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import EnvelopeOpening from "@/components/EnvelopeOpening";
 import Hero from "@/components/Hero";
 import BrideGroom from "@/components/BrideGroom";
-import LoveStory from "@/components/LoveStory";
 import EventDetails from "@/components/EventDetails";
 import Countdown from "@/components/Countdown";
-import Gallery from "@/components/Gallery";
 import RSVP from "@/components/RSVP";
 import WeddingGift from "@/components/WeddingGift";
 import Closing from "@/components/Closing";
-import FlowerPetals from "@/components/FlowerPetals";
+import JavaneseOrnaments from "@/components/JavaneseOrnaments";
+import MusicPlayer from "@/components/MusicPlayer";
+
+// Public domain Gamelan music (royalty-free)
+const MUSIC_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
 function App() {
   const [opened, setOpened] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div style={{ backgroundColor: "#2a1618", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Envelope Opening Intro */}
-      <EnvelopeOpening onOpen={() => setOpened(true)} />
+    <div style={{ backgroundColor: "#2a1618", minHeight: "100vh" }}>
+      {/* Hidden audio element */}
+      <audio ref={audioRef} src={MUSIC_URL} loop preload="none" />
+
+      {/* Envelope / Gate Opening Intro */}
+      <EnvelopeOpening onOpen={() => setOpened(true)} audioRef={audioRef} />
 
       {/* Main Invitation Content */}
       {opened && (
         <div>
-          <FlowerPetals />
+          <JavaneseOrnaments />
+          <MusicPlayer audioRef={audioRef} />
           <Hero />
           <BrideGroom />
-          <LoveStory />
           <EventDetails />
           <Countdown />
-          <Gallery />
           <RSVP />
           <WeddingGift />
           <Closing />

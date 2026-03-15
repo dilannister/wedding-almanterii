@@ -77,8 +77,8 @@
   --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 98%;
 
-  --app-font-sans: 'Georgia', serif;
-  --app-font-serif: 'Georgia', serif;
+  --app-font-sans: 'Inter', sans-serif;
+  --app-font-serif: 'Cormorant Garamond', Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: .5rem;
 

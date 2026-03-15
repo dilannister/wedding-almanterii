@@ -1,0 +1,186 @@
+Revise and improve the existing wedding invitation project.
+
+Do NOT rebuild the project from scratch.
+Keep the existing structure, components, and functionality.
+
+The goal is to enhance the visual experience, animations, and design to feel more elegant and cinematic.
+
+---
+
+OPENING COVER REVISION
+
+Modify the current cover opening animation.
+
+Instead of fading out normally, make the cover open like palace gates.
+
+Animation behavior:
+
+The screen splits vertically in the center.
+
+Two panels appear:
+
+Left panel slides to the left.
+Right panel slides to the right.
+
+Animation details:
+
+• duration around 1 second
+• smooth cinematic easing
+• slight blur while moving
+• subtle golden glow
+
+After the gate opens, reveal the hero section.
+
+---
+
+AUTO PLAY MUSIC
+
+When the user clicks the "Buka Undangan" button and the gate animation begins:
+
+Automatically start playing background music.
+
+Requirements:
+
+• music loops continuously
+• music volume starts soft
+• music continues while scrolling
+
+Add a floating music control button so the user can pause or play the music.
+
+---
+
+REMOVE FLOWER PETAL ANIMATION
+
+Remove the current falling flower petals animation.
+
+Replace it with floating Javanese ornaments.
+
+Examples:
+
+• batik kawung motifs
+• batik parang motifs
+• small gunungan ornaments
+
+Animation style:
+
+• slow floating movement
+• gentle rotation
+• fade in and out
+• soft golden glow
+
+Keep the amount minimal so the design stays elegant.
+
+---
+
+ADD JAVANESE ORNAMENTS TO SECTIONS
+
+Enhance each section with subtle Javanese decorative elements.
+
+Examples:
+
+• batik texture backgrounds
+• gold divider lines
+• gunungan ornaments
+• corner ornaments
+
+These elements should be subtle and not overwhelm the content.
+
+---
+
+TYPOGRAPHY UPDATE
+
+Replace the current fonts with more elegant curved fonts.
+
+Use this combination:
+
+Couple names:
+Great Vibes
+
+Section titles:
+Playfair Display
+
+Body text:
+Cormorant Garamond
+
+UI elements:
+Inter
+
+Apply these fonts consistently across the project.
+
+---
+
+SECTION ANIMATIONS
+
+Improve the animations for each section when entering the viewport.
+
+Hero
+fade + scale animation
+
+Quran verse
+soft fade with slight blur
+
+Bride & Groom
+portrait reveal with glow
+
+Save The Date
+numbers appear sequentially
+
+Event details
+slide from left and right
+
+RSVP
+fade upward
+
+Wedding Gift
+soft zoom animation
+
+Closing section
+slow fade
+
+---
+
+SECTION STRUCTURE
+
+Keep the existing section order but apply the following changes:
+
+Remove:
+Love Story section
+Gallery section
+
+Add:
+Wedding Gift section after RSVP.
+
+---
+
+RESPONSIVE DESIGN
+
+Ensure the design works well on:
+
+mobile phones
+tablets
+desktop screens
+
+Mobile version should have:
+
+• centered content
+• reduced decorative elements
+• faster animations
+
+Desktop version can have:
+
+• more spacing
+• larger ornaments
+
+---
+
+VISUAL STYLE
+
+Maintain a consistent theme:
+
+Royal Javanese wedding
+Maroon and gold color palette
+Elegant and romantic feeling
+Batik textures and ornaments
+Smooth cinematic animations
+
+Avoid overly busy designs.
