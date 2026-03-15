@@ -1,54 +1,19 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { fonts, colors } from "../lib/fonts";
+import { fonts, colors, sectionBg } from "../lib/fonts";
+import { GoldDivider, KawungCorner, BATIK_KAWUNG_DARK } from "../lib/shared";
 
-function FloatingParticle({ x, y, size, delay }) {
-  return (
-    <motion.div
-      style={{
-        position: "absolute",
-        left: `${x}%`,
-        top: `${y}%`,
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        background: `radial-gradient(circle, ${colors.gold}, transparent)`,
-      }}
-      animate={{
-        opacity: [0, 0.7, 0],
-        scale: [0.5, 1.8, 0.5],
-        y: [0, -28, 0],
-      }}
-      transition={{
-        duration: 4 + Math.random() * 3,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-  );
-}
-
-const particles = Array.from({ length: 16 }, (_, i) => ({
-  id: i,
-  x: 5 + (i * 6.2) % 90,
-  y: 10 + (i * 5.3) % 80,
-  size: 2 + (i % 3),
-  delay: i * 0.4,
+const particles = Array.from({ length: 14 }, (_, i) => ({
+  id: i, x: 5 + (i * 6.5) % 90, y: 8 + (i * 5.8) % 84, size: 2 + (i % 3), delay: i * 0.5,
 }));
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
-
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const h = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", h, { passive: true });
+    return () => window.removeEventListener("scroll", h);
   }, []);
-
-  const scrollToNext = () => {
-    document.getElementById("bride-groom")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section
@@ -60,145 +25,110 @@ export default function Hero() {
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
-        background: `linear-gradient(180deg, #1a0d10 0%, ${colors.darkBrown} 40%, ${colors.maroon} 70%, ${colors.darkBrown} 100%)`,
+        background: sectionBg.dark,
       }}
     >
-      {/* Parallax batik BG */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          transform: `translateY(${scrollY * 0.28}px)`,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='90' height='90' viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='45' cy='45' r='35' stroke='%23C9A46C' stroke-opacity='0.04' stroke-width='1' fill='none'/%3E%3Ccircle cx='45' cy='45' r='22' stroke='%23C9A46C' stroke-opacity='0.03' stroke-width='1' fill='none'/%3E%3Ccircle cx='45' cy='45' r='9' stroke='%23C9A46C' stroke-opacity='0.04' stroke-width='1' fill='none'/%3E%3Ccircle cx='0' cy='0' r='18' stroke='%23C9A46C' stroke-opacity='0.025' stroke-width='1' fill='none'/%3E%3Ccircle cx='90' cy='0' r='18' stroke='%23C9A46C' stroke-opacity='0.025' stroke-width='1' fill='none'/%3E%3Ccircle cx='0' cy='90' r='18' stroke='%23C9A46C' stroke-opacity='0.025' stroke-width='1' fill='none'/%3E%3Ccircle cx='90' cy='90' r='18' stroke='%23C9A46C' stroke-opacity='0.025' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
-          backgroundSize: "90px 90px",
-        }}
-      />
+      {/* Parallax batik */}
+      <div style={{
+        position: "absolute", inset: 0,
+        transform: `translateY(${scrollY * 0.25}px)`,
+        backgroundImage: BATIK_KAWUNG_DARK,
+        backgroundSize: "80px 80px",
+      }} />
 
       {/* Radial gold glow */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "radial-gradient(ellipse 55% 45% at 50% 52%, rgba(201,164,108,0.11) 0%, transparent 72%)",
-        }}
-      />
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse 60% 45% at 50% 52%, rgba(201,164,108,0.1) 0%, transparent 70%)",
+      }} />
 
-      {/* Particles */}
+      {/* Floating particles */}
       <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
         {particles.map((p) => (
-          <FloatingParticle key={p.id} {...p} />
+          <motion.div key={p.id}
+            style={{ position: "absolute", left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size, borderRadius: "50%", background: `radial-gradient(circle, ${colors.gold}, transparent)` }}
+            animate={{ opacity: [0, 0.6, 0], scale: [0.5, 2, 0.5], y: [0, -24, 0] }}
+            transition={{ duration: 4 + (p.id % 3), delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+          />
         ))}
       </div>
 
-      {/* Top / bottom gold lines */}
+      {/* Corner kawung ornaments */}
+      <div style={{ position: "absolute", top: 16, left: 16 }}><KawungCorner size={70} /></div>
+      <div style={{ position: "absolute", top: 16, right: 16 }}><KawungCorner size={70} flip /></div>
+      <div style={{ position: "absolute", bottom: 16, left: 16, transform: "rotate(180deg)" }}><KawungCorner size={70} flip /></div>
+      <div style={{ position: "absolute", bottom: 16, right: 16, transform: "rotate(180deg)" }}><KawungCorner size={70} /></div>
+
+      {/* Gold border lines */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${colors.gold}, transparent)` }} />
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${colors.gold}, transparent)` }} />
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 10, textAlign: "center", padding: "0 20px", maxWidth: 760, margin: "0 auto" }}>
+      <div style={{ position: "relative", zIndex: 10, textAlign: "center", padding: "80px 24px", maxWidth: 720, margin: "0 auto" }}>
         <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          style={{
-            fontFamily: fonts.ui,
-            fontSize: 11,
-            letterSpacing: "0.45em",
-            color: colors.gold,
-            textTransform: "uppercase",
-            marginBottom: 20,
-          }}
+          style={{ fontFamily: fonts.ui, fontSize: 10, letterSpacing: "0.5em", color: colors.gold, textTransform: "uppercase", marginBottom: 16 }}
         >
-          The Wedding of
+          The Wedding Of
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, scale: 0.82, y: 44 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.3, delay: 0.45, ease: [0.21, 1.02, 0.73, 1.02] }}
+          initial={{ opacity: 0, scale: 0.84, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.3, delay: 0.4, ease: [0.21, 1.02, 0.73, 1.02] }}
           style={{
-            fontFamily: fonts.script,
-            fontSize: "clamp(64px, 14vw, 130px)",
-            color: colors.gold,
-            lineHeight: 1.1,
-            marginBottom: 12,
-            textShadow: `0 0 35px rgba(201,164,108,0.45), 0 0 70px rgba(201,164,108,0.18)`,
+            fontFamily: fonts.script, fontSize: "clamp(60px,13vw,118px)", color: colors.gold,
+            lineHeight: 1.1, marginBottom: 12,
+            textShadow: "0 0 35px rgba(201,164,108,0.45), 0 0 70px rgba(201,164,108,0.18)",
           }}
         >
           Alman & Terii
         </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.9, delay: 1 }}
-          style={{ margin: "24px auto", maxWidth: 320 }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg, transparent, ${colors.gold})` }} />
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 0L11.8 6.5H18.5L13.1 10.5L15 17L10 13L5 17L6.9 10.5L1.5 6.5H8.2Z" fill="#C9A46C"/></svg>
-            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg, ${colors.gold}, transparent)` }} />
-          </div>
+        <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ duration: 0.9, delay: 1 }} style={{ margin: "20px auto 24px", maxWidth: 340 }}>
+          <GoldDivider />
         </motion.div>
 
+        {/* Quran quote */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 1.15 }}
-          style={{ fontFamily: fonts.body, fontSize: 18, color: colors.cream, opacity: 0.82, marginBottom: 8, fontStyle: "italic" }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, delay: 1.1 }}
+          style={{ fontFamily: fonts.body, fontSize: "clamp(14px,2vw,17px)", color: colors.cream, opacity: 0.78, fontStyle: "italic", lineHeight: 1.8, marginBottom: 20, maxWidth: 580, margin: "0 auto 20px" }}
         >
-          Sabtu, 12 April 2025
+          "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
         </motion.p>
 
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.3 }}
-          style={{ fontFamily: fonts.ui, fontSize: 11, letterSpacing: "0.2em", color: colors.gold, marginBottom: 44, textTransform: "uppercase" }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.3 }}
+          style={{ fontFamily: fonts.body, fontSize: "clamp(13px,1.8vw,16px)", color: colors.cream, opacity: 0.65, lineHeight: 1.75, marginBottom: 36, maxWidth: 540, margin: "0 auto 36px" }}
         >
-          Pura Mangkunegaran, Surakarta
+          Dengan penuh rasa syukur kepada Allah SWT, kami bermaksud menyelenggarakan pernikahan kami dan mengundang Bapak/Ibu/Saudara/i untuk hadir serta memberikan doa restu.
         </motion.p>
 
         <motion.button
-          onClick={scrollToNext}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          onClick={() => document.getElementById("quran-verse")?.scrollIntoView({ behavior: "smooth" })}
+          initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.5 }}
           style={{
-            padding: "14px 42px",
-            borderRadius: 9999,
-            border: `1px solid ${colors.gold}`,
-            background: "transparent",
-            color: colors.gold,
-            fontFamily: fonts.ui,
-            fontWeight: 500,
-            fontSize: 12,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            cursor: "pointer",
+            padding: "13px 40px", borderRadius: 9999,
+            border: `1px solid ${colors.gold}`, background: "transparent",
+            color: colors.gold, fontFamily: fonts.ui, fontWeight: 500,
+            fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", cursor: "pointer",
           }}
-          whileHover={{ scale: 1.05, backgroundColor: "rgba(201,164,108,0.12)", boxShadow: "0 0 30px rgba(201,164,108,0.35)" }}
+          whileHover={{ scale: 1.04, backgroundColor: "rgba(201,164,108,0.1)", boxShadow: "0 0 28px rgba(201,164,108,0.32)" }}
           whileTap={{ scale: 0.97 }}
         >
           Lihat Undangan
         </motion.button>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll hint */}
       <motion.div
-        style={{
-          position: "absolute",
-          bottom: 32,
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        style={{ position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)" }}
+        animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}
       >
-        <div style={{ width: 1, height: 48, background: `linear-gradient(180deg, ${colors.gold}, transparent)` }} />
+        <div style={{ width: 1, height: 44, background: `linear-gradient(180deg, ${colors.gold}, transparent)` }} />
       </motion.div>
     </section>
   );

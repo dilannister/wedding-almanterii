@@ -1,107 +1,71 @@
 import { motion } from "framer-motion";
-import { fonts, colors } from "../lib/fonts";
+import { fonts, colors, sectionBg } from "../lib/fonts";
+import { SectionHeader, KawungCorner, BATIK_KAWUNG_DARK } from "../lib/shared";
 
-function Profile({ name, born, parents, delay }) {
-  const initials = name.charAt(0);
+function Portrait({ name, role, birthdate, parents, delay, isGroom }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.92 }}
+      initial={{ opacity: 0, y: 40, scale: 0.93 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 1.2, delay, ease: [0.21, 1.02, 0.73, 1.02] }}
-      style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 24px" }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.1, delay, ease: [0.21, 1.02, 0.73, 1.02] }}
+      style={{
+        textAlign: "center",
+        flex: 1,
+        minWidth: "clamp(200px, 38%, 280px)",
+        padding: "0 16px",
+      }}
     >
-      {/* Portrait with glow reveal */}
-      <motion.div
-        style={{ position: "relative", marginBottom: 28 }}
-        whileHover={{ scale: 1.04 }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* Outer glow ring */}
+      {/* Portrait ring with glow animation */}
+      <div style={{ position: "relative", display: "inline-block", marginBottom: 24 }}>
         <motion.div
-          initial={{ opacity: 0, scale: 0.7 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.4, delay: delay + 0.2 }}
           style={{
-            position: "absolute",
-            inset: -10,
+            width: "clamp(130px,26vw,172px)",
+            height: "clamp(130px,26vw,172px)",
             borderRadius: "50%",
-            border: `1px solid rgba(201,164,108,0.25)`,
-            boxShadow: "0 0 40px rgba(201,164,108,0.15)",
-          }}
-        />
-        {/* Portrait circle */}
-        <div
-          style={{
-            width: 160,
-            height: 160,
-            borderRadius: "50%",
-            background: `linear-gradient(145deg, ${colors.maroon}, ${colors.darkBrown})`,
-            border: `2px solid ${colors.gold}`,
-            boxShadow: `0 0 30px rgba(201,164,108,0.25), inset 0 0 30px rgba(201,164,108,0.06)`,
+            background: `radial-gradient(circle at 38% 36%, rgba(201,164,108,0.22), rgba(75,31,40,0.55))`,
+            border: `2px solid rgba(201,164,108,0.38)`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            position: "relative",
+            overflow: "hidden",
           }}
+          animate={{ boxShadow: ["0 0 28px rgba(201,164,108,0.14)", "0 0 52px rgba(201,164,108,0.26)", "0 0 28px rgba(201,164,108,0.14)"] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <span style={{ fontFamily: fonts.script, fontSize: 56, color: colors.gold }}>{initials}</span>
-        </div>
-      </motion.div>
+          <span style={{ fontFamily: fonts.script, fontSize: "clamp(42px,9vw,62px)", color: colors.gold, textShadow: "0 0 18px rgba(201,164,108,0.5)" }}>
+            {name[0]}
+          </span>
+        </motion.div>
+        {/* Rotating outer ring */}
+        <motion.div
+          style={{
+            position: "absolute", inset: -10, borderRadius: "50%",
+            border: `1px solid rgba(201,164,108,0.16)`, pointerEvents: "none",
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
 
-      {/* Name — letter-by-letter */}
-      <h3 style={{ fontFamily: fonts.script, fontSize: 44, color: colors.gold, marginBottom: 8, lineHeight: 1 }}>
-        {name.split("").map((ch, i) => (
-          <motion.span
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: delay + 0.4 + i * 0.06 }}
-            style={{ display: "inline-block" }}
-          >
-            {ch === " " ? "\u00A0" : ch}
-          </motion.span>
-        ))}
+      <p style={{ fontFamily: fonts.ui, fontSize: 9, letterSpacing: "0.55em", color: colors.gold, textTransform: "uppercase", marginBottom: 10, opacity: 0.72 }}>
+        {role}
+      </p>
+      <h3 style={{ fontFamily: fonts.heading, fontSize: "clamp(20px,3.8vw,30px)", color: colors.cream, fontWeight: 600, marginBottom: 8, lineHeight: 1.25 }}>
+        {name}
       </h3>
-
-      <p style={{ fontFamily: fonts.body, fontSize: 14, color: colors.cream, opacity: 0.65, marginBottom: 16, letterSpacing: "0.04em" }}>
-        {born}
+      <p style={{ fontFamily: fonts.body, fontSize: 14, color: colors.cream, opacity: 0.52, fontStyle: "italic", marginBottom: 16 }}>
+        Lahir: {birthdate}
       </p>
-
-      <div style={{ width: 40, height: 1, background: colors.gold, opacity: 0.45, margin: "0 auto 16px" }} />
-
-      <p style={{ fontFamily: fonts.ui, fontSize: 10, letterSpacing: "0.35em", color: colors.gold, opacity: 0.65, textTransform: "uppercase", marginBottom: 8 }}>
-        Putra/Putri dari
-      </p>
-      <p style={{ fontFamily: fonts.body, fontSize: 15, color: colors.cream, opacity: 0.82, lineHeight: 1.5 }}>
+      <div style={{ height: 1, background: `linear-gradient(90deg, transparent, rgba(201,164,108,0.25), transparent)`, marginBottom: 14 }} />
+      <p style={{ fontFamily: fonts.body, fontSize: 13, color: colors.cream, opacity: 0.62, lineHeight: 1.65 }}>
+        Putr{isGroom ? "a" : "i"} dari<br />
         {parents}
       </p>
     </motion.div>
   );
 }
-
-function SectionHeader({ pre, title }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 36 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1 }}
-      style={{ textAlign: "center", marginBottom: 60 }}
-    >
-      <p style={{ fontFamily: fonts.ui, fontSize: 10, letterSpacing: "0.5em", color: colors.gold, textTransform: "uppercase", marginBottom: 14 }}>{pre}</p>
-      <h2 style={{ fontFamily: fonts.heading, fontSize: "clamp(30px,5vw,46px)", color: colors.cream, fontWeight: 500 }}>{title}</h2>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginTop: 20 }}>
-        <div style={{ height: 1, width: 70, background: `linear-gradient(90deg, transparent, ${colors.gold})` }} />
-        <div style={{ width: 6, height: 6, background: colors.gold, transform: "rotate(45deg)" }} />
-        <div style={{ height: 1, width: 70, background: `linear-gradient(90deg, ${colors.gold}, transparent)` }} />
-      </div>
-    </motion.div>
-  );
-}
-
-export { SectionHeader };
 
 export default function BrideGroom() {
   return (
@@ -111,54 +75,61 @@ export default function BrideGroom() {
         position: "relative",
         padding: "100px 0",
         overflow: "hidden",
-        background: `linear-gradient(180deg, ${colors.darkBrown} 0%, #1a0d10 50%, ${colors.darkBrown} 100%)`,
+        background: sectionBg.maroonGlow,
       }}
     >
-      {/* Subtle batik BG */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='30' stroke='%23C9A46C' stroke-opacity='0.03' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
-          backgroundSize: "80px 80px",
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: BATIK_KAWUNG_DARK, backgroundSize: "80px 80px" }} />
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 75% 60% at 50% 50%, rgba(201,164,108,0.07) 0%, transparent 70%)" }} />
 
-      <div style={{ position: "relative", maxWidth: 900, margin: "0 auto", padding: "0 20px" }}>
-        <SectionHeader pre="Mempelai" title="Mempelai Pria & Wanita" />
+      <div style={{ position: "absolute", top: 14, left: 14 }}><KawungCorner size={65} /></div>
+      <div style={{ position: "absolute", top: 14, right: 14 }}><KawungCorner size={65} flip /></div>
+      <div style={{ position: "absolute", bottom: 14, left: 14, transform: "rotate(180deg)" }}><KawungCorner size={65} flip /></div>
+      <div style={{ position: "absolute", bottom: 14, right: 14, transform: "rotate(180deg)" }}><KawungCorner size={65} /></div>
 
-        {/* Profiles frame */}
-        <div
-          style={{
-            border: `1px solid rgba(201,164,108,0.18)`,
-            borderRadius: 20,
-            padding: "52px 20px",
-            background: "rgba(75,31,40,0.18)",
-            backdropFilter: "blur(8px)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 48,
-          }}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${colors.gold}, transparent)` }} />
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${colors.gold}, transparent)` }} />
+
+      <div style={{ position: "relative", maxWidth: 820, margin: "0 auto", padding: "0 24px" }}>
+        <SectionHeader pre="Bismillahirrahmanirrahim" title="Mempelai" />
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          style={{ fontFamily: fonts.body, fontSize: "clamp(14px,2.2vw,17px)", color: colors.cream, opacity: 0.68, lineHeight: 1.85, textAlign: "center", marginBottom: 56 }}
         >
-          {/* Desktop: row; mobile: column via CSS */}
-          <style>{`
-            @media (min-width: 768px) {
-              .profiles-row { flex-direction: row !important; gap: 0 !important; }
-            }
-          `}</style>
-          <div className="profiles-row" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 48, width: "100%" }}>
-            <Profile name="Alman" born="Surakarta, 14 Maret 1996" parents="Bapak Suharto & Ibu Sumarni" delay={0} />
+          Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.
+        </motion.p>
 
-            {/* Divider */}
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, flexShrink: 0 }}>
-              <div style={{ width: 1, height: 60, background: `linear-gradient(180deg, transparent, ${colors.gold})` }} />
-              <span style={{ fontFamily: fonts.script, fontSize: 36, color: colors.gold, lineHeight: 1 }}>&</span>
-              <div style={{ width: 1, height: 60, background: `linear-gradient(180deg, ${colors.gold}, transparent)` }} />
-            </div>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", gap: "clamp(16px,4vw,52px)", flexWrap: "wrap" }}>
+          <Portrait
+            name="D. Sukma Almansyah"
+            role="Mempelai Pria"
+            birthdate="25 Desember 1990"
+            parents="(Alm) Ade Ibrahim & Ibu Yani Riyani"
+            delay={0.1}
+            isGroom
+          />
 
-            <Profile name="Terii" born="Yogyakarta, 22 Agustus 1997" parents="Bapak Widodo & Ibu Sriyaningsih" delay={0.25} />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.35 }}
+            style={{ textAlign: "center", paddingTop: "clamp(55px,11vw,82px)" }}
+          >
+            <p style={{ fontFamily: fonts.script, fontSize: "clamp(34px,7vw,54px)", color: colors.gold, textShadow: "0 0 18px rgba(201,164,108,0.35)", lineHeight: 1 }}>&</p>
+          </motion.div>
+
+          <Portrait
+            name="Tri Andini"
+            role="Mempelai Wanita"
+            birthdate="04 Maret 2002"
+            parents="Bapak Nurohmat & Ibu Siti Mulyani"
+            delay={0.22}
+            isGroom={false}
+          />
         </div>
       </div>
     </section>

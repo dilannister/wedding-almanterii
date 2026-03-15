@@ -1,0 +1,328 @@
+Revise and improve the existing wedding invitation website.
+
+Do NOT remove existing functionality.
+Only improve design, animations, and layout.
+
+The design theme must feel like a:
+
+Royal Javanese Wedding Invitation
+Elegant, warm, cinematic, and luxurious.
+
+Color palette:
+
+Maroon
+Beige
+Soft gold
+
+---
+
+OPENING COVER CONTENT
+
+The opening cover must display the following text in this exact order:
+
+The Wedding Of
+
+Alman & Terii
+
+26 April 2026
+
+Kepada Yth.
+Bapak / Ibu / Saudara / i
+
+[Guest Name Dynamic]
+
+Buka Undangan
+
+The guest name must remain dynamic.
+
+---
+
+OPENING GATE ANIMATION
+
+When the user clicks "Buka Undangan":
+
+Create a ceremonial gate opening animation.
+
+The screen must split vertically in the center.
+
+Left panel slides to the left.
+Right panel slides to the right.
+
+Animation style:
+
+• duration around 1 second
+• smooth cinematic easing
+• slight blur while opening
+• subtle golden glow
+
+After the gate opens, reveal the Hero section.
+
+---
+
+AUTO PLAY MUSIC
+
+When the gate animation starts:
+
+Automatically start background music.
+
+Requirements:
+
+• music loops continuously
+• soft volume
+• music continues while scrolling
+
+Add a floating play/pause music button.
+
+---
+
+SECTION CONTENT
+
+Use the following content exactly.
+
+HERO SECTION
+
+Title
+The Wedding Of
+
+Couple Name
+Alman & Terii
+
+Quote
+"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
+
+Description
+Dengan penuh rasa syukur kepada Allah SWT, kami bermaksud menyelenggarakan pernikahan kami dan mengundang Bapak/Ibu/Saudara/i untuk hadir serta memberikan doa restu.
+
+---
+
+QURAN VERSE SECTION
+
+"Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat kebesaran Allah."
+
+QS. Adz-Dzariyat : 49
+
+Semoga dengan bersatunya kami dalam ikatan suci pernikahan ini, menjadi awal perjalanan hidup yang penuh keberkahan, kasih sayang, dan kebahagiaan.
+
+---
+
+BRIDE & GROOM SECTION
+
+Opening text
+
+Bismillahirrahmanirrahim
+
+Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.
+
+Groom
+
+D. Sukma Almansyah
+
+Lahir: 25 Desember 1990
+
+Putra dari
+(Alm) Ade Ibrahim & Ibu Yani Riyani
+
+Bride
+
+Tri Andini
+
+Lahir: 04 Maret 2002
+
+Putri dari
+Bapak Nurohmat & Ibu Siti Mulyani
+
+---
+
+SAVE THE DATE SECTION
+
+Save The Date
+
+Kami akan memulai perjalanan baru sebagai suami dan istri pada hari yang berbahagia:
+
+26 April 2026
+
+Kami berharap kehadiran serta doa restu dari keluarga dan sahabat tercinta untuk menyempurnakan kebahagiaan kami.
+
+---
+
+EVENT DETAILS SECTION
+
+Akad Nikah
+
+Hari / Tanggal
+Minggu, 26 April 2026
+
+Waktu
+09.00 WIB
+
+Tempat
+JL Al-Innayah Karang Ampel RT003/RW004 No.15
+Kp Rawa Kalong
+Desa Karang Satria
+Kecamatan Tambun Utara
+Kabupaten Bekasi
+
+Resepsi Pernikahan
+
+Hari / Tanggal
+Minggu, 26 April 2026
+
+Waktu
+10.00 WIB – Selesai
+
+Tempat
+JL Al-Innayah Karang Ampel RT003/RW004 No.15
+Kp Rawa Kalong
+Desa Karang Satria
+Kecamatan Tambun Utara
+Kabupaten Bekasi
+
+---
+
+RSVP SECTION
+
+Konfirmasi Kehadiran
+
+Kehadiran dan doa restu Anda merupakan kebahagiaan yang sangat berarti bagi kami.
+
+Silakan konfirmasi kehadiran Anda melalui form RSVP yang tersedia.
+
+Kami sangat menantikan kehadiran Anda di hari bahagia kami.
+
+---
+
+WEDDING GIFT SECTION
+
+Wedding Gift
+
+Doa restu Anda merupakan hadiah terindah bagi kami.
+
+Namun apabila keluarga dan sahabat ingin memberikan tanda kasih, dapat melalui:
+
+Bank BCA
+
+7391383778
+
+a.n Tri Andini
+
+Terima kasih atas doa, dukungan, dan perhatian yang diberikan kepada kami.
+
+---
+
+CLOSING SECTION
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
+
+Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.
+
+Kami yang berbahagia
+
+Alman & Terii
+
+---
+
+JAVANESE ORNAMENTS
+
+Every section MUST contain traditional Javanese decorative elements.
+
+Examples:
+
+batik kawung patterns
+batik parang patterns
+gunungan ornaments
+gold decorative dividers
+corner ornaments
+
+These ornaments should appear in:
+
+background
+corners
+section dividers
+
+---
+
+BACKGROUND STYLE
+
+Do NOT use the same background for every section.
+
+Alternate between maroon and beige tones.
+
+Example:
+
+Section 1
+deep maroon gradient + batik texture
+
+Section 2
+beige background + subtle batik overlay
+
+Section 3
+maroon + gold glow
+
+Section 4
+beige + radial lighting
+
+Section 5
+maroon + decorative patterns
+
+This prevents sections from blending together.
+
+---
+
+SECTION ANIMATIONS
+
+Each section must animate when entering the viewport.
+
+Hero
+fade + scale
+
+Quran Verse
+soft fade
+
+Bride & Groom
+portrait reveal with glow
+
+Save The Date
+numbers appear sequentially
+
+Event Details
+slide from left and right
+
+RSVP
+fade upward
+
+Wedding Gift
+soft zoom
+
+Closing
+slow fade
+
+---
+
+RESPONSIVE DESIGN
+
+The website must work perfectly on:
+
+mobile phones
+tablets
+desktop screens
+
+Mobile layout:
+
+• centered content
+• lighter ornaments
+
+Desktop layout:
+
+• richer decoration
+• more spacing
+
+---
+
+FINAL GOAL
+
+The final website must feel like:
+
+A luxurious royal Javanese wedding invitation
+Elegant and cinematic
+Rich with traditional ornaments
+Smooth animated sections

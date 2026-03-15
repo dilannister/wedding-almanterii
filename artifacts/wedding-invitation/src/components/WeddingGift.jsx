@@ -1,31 +1,14 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Copy, Check } from "lucide-react";
-import { fonts, colors } from "../lib/fonts";
-import { SectionHeader } from "./BrideGroom";
-
-const gifts = [
-  {
-    icon: "🏦",
-    type: "Transfer Bank",
-    bank: "Bank Central Asia (BCA)",
-    accountNumber: "1234567890",
-    accountName: "Alman Pratama",
-  },
-  {
-    icon: "📱",
-    type: "Dompet Digital",
-    bank: "GoPay / OVO",
-    accountNumber: "0812-3456-7890",
-    accountName: "Alman & Terii",
-  },
-];
+import { fonts, colors, sectionBg } from "../lib/fonts";
+import { SectionHeader, KawungCorner, GoldDivider, BATIK_KAWUNG_DARK } from "../lib/shared";
 
 function GiftCard({ gift, delay }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(gift.accountNumber).then(() => {
+    navigator.clipboard.writeText(gift.accountNumber.replace(/-/g, "")).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     });
@@ -39,68 +22,54 @@ function GiftCard({ gift, delay }) {
       transition={{ duration: 1.1, delay, ease: [0.21, 1.02, 0.73, 1.02] }}
       style={{
         borderRadius: 20,
-        padding: "36px 32px",
-        background: `linear-gradient(145deg, rgba(75,31,40,0.5), rgba(42,22,24,0.75))`,
+        padding: "40px 36px",
+        background: `linear-gradient(145deg, rgba(75,31,40,0.55), rgba(42,22,24,0.78))`,
         border: "1px solid rgba(201,164,108,0.22)",
         backdropFilter: "blur(10px)",
         position: "relative",
         overflow: "hidden",
+        maxWidth: 440,
+        margin: "0 auto",
       }}
-      whileHover={{ y: -5, boxShadow: "0 18px 50px rgba(201,164,108,0.14)" }}
+      whileHover={{ y: -5, boxShadow: "0 18px 50px rgba(201,164,108,0.16)" }}
     >
-      {/* Corner glow */}
-      <div style={{ position: "absolute", top: 0, right: 0, width: 90, height: 90, background: "radial-gradient(circle at top right, rgba(201,164,108,0.09), transparent)", borderRadius: "0 20px 0 0" }} />
+      <div style={{ position: "absolute", top: 0, right: 0, width: 100, height: 100, background: "radial-gradient(circle at top right, rgba(201,164,108,0.1), transparent)", borderRadius: "0 20px 0 0" }} />
 
-      <div style={{ fontSize: 36, marginBottom: 18 }}>{gift.icon}</div>
+      <div style={{ fontSize: 36, marginBottom: 16, textAlign: "center" }}>{gift.icon}</div>
 
-      <span style={{
-        display: "inline-block",
-        padding: "4px 12px",
-        borderRadius: 99,
-        background: "rgba(201,164,108,0.12)",
-        border: "1px solid rgba(201,164,108,0.28)",
-        fontFamily: fonts.ui,
-        fontSize: 10,
-        letterSpacing: "0.25em",
-        color: colors.gold,
-        textTransform: "uppercase",
-        marginBottom: 18,
-      }}>
+      <p style={{ fontFamily: fonts.ui, fontSize: 9, letterSpacing: "0.45em", color: colors.gold, textTransform: "uppercase", textAlign: "center", marginBottom: 18, opacity: 0.8 }}>
         {gift.type}
-      </span>
+      </p>
 
-      <h3 style={{ fontFamily: fonts.heading, fontSize: 22, color: colors.gold, fontWeight: 600, marginBottom: 20 }}>{gift.bank}</h3>
+      <h3 style={{ fontFamily: fonts.heading, fontSize: 24, color: colors.gold, fontWeight: 600, marginBottom: 20, textAlign: "center" }}>{gift.bank}</h3>
 
       <div style={{ height: 1, background: "rgba(201,164,108,0.18)", marginBottom: 20 }} />
 
-      <div style={{ marginBottom: 10 }}>
-        <p style={{ fontFamily: fonts.ui, fontSize: 10, letterSpacing: "0.25em", color: colors.cream, opacity: 0.45, textTransform: "uppercase", marginBottom: 5 }}>Nama Rekening</p>
-        <p style={{ fontFamily: fonts.body, fontSize: 16, color: colors.cream, opacity: 0.88 }}>{gift.accountName}</p>
+      <div style={{ marginBottom: 12 }}>
+        <p style={{ fontFamily: fonts.ui, fontSize: 9, letterSpacing: "0.3em", color: colors.cream, opacity: 0.42, textTransform: "uppercase", marginBottom: 5 }}>Nama Rekening</p>
+        <p style={{ fontFamily: fonts.body, fontSize: 17, color: colors.cream, opacity: 0.88 }}>{gift.accountName}</p>
       </div>
 
       <div style={{ marginBottom: 24 }}>
-        <p style={{ fontFamily: fonts.ui, fontSize: 10, letterSpacing: "0.25em", color: colors.cream, opacity: 0.45, textTransform: "uppercase", marginBottom: 5 }}>Nomor Rekening</p>
-        <p style={{ fontFamily: fonts.heading, fontSize: 22, color: colors.cream, fontWeight: 600, letterSpacing: "0.08em" }}>{gift.accountNumber}</p>
+        <p style={{ fontFamily: fonts.ui, fontSize: 9, letterSpacing: "0.3em", color: colors.cream, opacity: 0.42, textTransform: "uppercase", marginBottom: 5 }}>Nomor Rekening</p>
+        <p style={{ fontFamily: fonts.heading, fontSize: "clamp(22px,4vw,28px)", color: colors.cream, fontWeight: 600, letterSpacing: "0.06em" }}>{gift.accountNumber}</p>
       </div>
 
       <motion.button
         onClick={handleCopy}
         style={{
           width: "100%",
-          padding: "12px",
+          padding: "13px",
           borderRadius: 10,
           background: copied ? "rgba(201,164,108,0.28)" : "rgba(201,164,108,0.12)",
-          border: "1px solid rgba(201,164,108,0.35)",
+          border: "1px solid rgba(201,164,108,0.38)",
           color: colors.gold,
           fontFamily: fonts.ui,
           fontSize: 11,
           letterSpacing: "0.18em",
           textTransform: "uppercase",
           cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 8,
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
           transition: "background 0.25s",
         }}
         whileHover={{ scale: 1.02 }}
@@ -120,19 +89,21 @@ export default function WeddingGift() {
         position: "relative",
         padding: "100px 0",
         overflow: "hidden",
-        background: `linear-gradient(180deg, ${colors.darkBrown} 0%, #1a0d10 50%, ${colors.darkBrown} 100%)`,
+        background: sectionBg.maroonGlow,
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 50 5 50Z' stroke='%23C9A46C' stroke-opacity='0.025' stroke-width='0.8' fill='none'/%3E%3C/svg%3E")`,
-          backgroundSize: "60px 60px",
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: BATIK_KAWUNG_DARK, backgroundSize: "80px 80px" }} />
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 55% at 50% 50%, rgba(201,164,108,0.07) 0%, transparent 70%)" }} />
 
-      <div style={{ position: "relative", maxWidth: 840, margin: "0 auto", padding: "0 20px" }}>
+      <div style={{ position: "absolute", top: 14, left: 14 }}><KawungCorner size={65} /></div>
+      <div style={{ position: "absolute", top: 14, right: 14 }}><KawungCorner size={65} flip /></div>
+      <div style={{ position: "absolute", bottom: 14, left: 14, transform: "rotate(180deg)" }}><KawungCorner size={65} flip /></div>
+      <div style={{ position: "absolute", bottom: 14, right: 14, transform: "rotate(180deg)" }}><KawungCorner size={65} /></div>
+
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${colors.gold}, transparent)` }} />
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg, transparent, ${colors.gold}, transparent)` }} />
+
+      <div style={{ position: "relative", maxWidth: 760, margin: "0 auto", padding: "0 24px" }}>
         <SectionHeader pre="Wedding Gift" title="Hadiah Pernikahan" />
 
         <motion.p
@@ -140,27 +111,40 @@ export default function WeddingGift() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          style={{
-            fontFamily: fonts.body,
-            fontSize: 16,
-            color: colors.cream,
-            opacity: 0.68,
-            textAlign: "center",
-            maxWidth: 480,
-            margin: "0 auto 52px",
-            lineHeight: 1.7,
-            fontStyle: "italic",
-          }}
+          style={{ fontFamily: fonts.body, fontSize: "clamp(14px,2.2vw,17px)", color: colors.cream, opacity: 0.68, textAlign: "center", maxWidth: 500, margin: "0 auto 16px", lineHeight: 1.85, fontStyle: "italic" }}
         >
-          Doa dan kehadiran Anda adalah hadiah terbaik bagi kami. Namun jika Anda ingin memberikan sesuatu, berikut informasinya:
+          Doa restu Anda merupakan hadiah terindah bagi kami.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2 }}
+          style={{ fontFamily: fonts.body, fontSize: "clamp(13px,2vw,15px)", color: colors.cream, opacity: 0.55, textAlign: "center", maxWidth: 500, margin: "0 auto 40px", lineHeight: 1.75 }}
+        >
+          Namun apabila keluarga dan sahabat ingin memberikan tanda kasih, dapat melalui:
         </motion.p>
 
-        <style>{`@media(min-width:640px){.gift-grid{grid-template-columns:1fr 1fr !important;}}`}</style>
-        <div className="gift-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
-          {gifts.map((g, i) => (
-            <GiftCard key={i} gift={g} delay={i * 0.18} />
-          ))}
-        </div>
+        <GiftCard
+          gift={{
+            icon: "🏦",
+            type: "Transfer Bank",
+            bank: "Bank BCA",
+            accountNumber: "7391383778",
+            accountName: "Tri Andini",
+          }}
+          delay={0}
+        />
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4 }}
+          style={{ fontFamily: fonts.body, fontSize: 14, color: colors.cream, opacity: 0.5, textAlign: "center", marginTop: 36, lineHeight: 1.75, fontStyle: "italic" }}
+        >
+          Terima kasih atas doa, dukungan, dan perhatian yang diberikan kepada kami.
+        </motion.p>
       </div>
     </section>
   );

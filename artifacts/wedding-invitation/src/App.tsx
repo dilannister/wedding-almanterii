@@ -1,16 +1,16 @@
 import { useState, useRef } from "react";
 import EnvelopeOpening from "@/components/EnvelopeOpening";
 import Hero from "@/components/Hero";
+import QuranVerse from "@/components/QuranVerse";
 import BrideGroom from "@/components/BrideGroom";
+import SaveTheDate from "@/components/SaveTheDate";
 import EventDetails from "@/components/EventDetails";
-import Countdown from "@/components/Countdown";
 import RSVP from "@/components/RSVP";
 import WeddingGift from "@/components/WeddingGift";
 import Closing from "@/components/Closing";
 import JavaneseOrnaments from "@/components/JavaneseOrnaments";
 import MusicPlayer from "@/components/MusicPlayer";
 
-// Public domain Gamelan music (royalty-free)
 const MUSIC_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
 function App() {
@@ -18,24 +18,38 @@ function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div style={{ backgroundColor: "#2a1618", minHeight: "100vh" }}>
-      {/* Hidden audio element */}
+    <div style={{ backgroundColor: "#1a0d10", minHeight: "100vh" }}>
       <audio ref={audioRef} src={MUSIC_URL} loop preload="none" />
 
-      {/* Envelope / Gate Opening Intro */}
       <EnvelopeOpening onOpen={() => setOpened(true)} audioRef={audioRef} />
 
-      {/* Main Invitation Content */}
       {opened && (
         <div>
           <JavaneseOrnaments />
           <MusicPlayer audioRef={audioRef} />
+
+          {/* 1 — Dark maroon hero */}
           <Hero />
+
+          {/* 2 — Light beige quran verse */}
+          <QuranVerse />
+
+          {/* 3 — Dark maroon + glow bride & groom */}
           <BrideGroom />
+
+          {/* 4 — Light beige save the date / countdown */}
+          <SaveTheDate />
+
+          {/* 5 — Dark event details */}
           <EventDetails />
-          <Countdown />
+
+          {/* 6 — Light beige RSVP */}
           <RSVP />
+
+          {/* 7 — Dark wedding gift */}
           <WeddingGift />
+
+          {/* 8 — Deep dark closing */}
           <Closing />
         </div>
       )}
